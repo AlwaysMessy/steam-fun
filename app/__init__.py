@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from setting import config
 from extensions import db
+from app.blueprints.web import web
 
 def create_app(config_name=None):
     if config_name is None:
@@ -12,5 +13,7 @@ def create_app(config_name=None):
         app.config.from_object(config[config_name])
 
         db.init_app(app)
+
+        app.register_blueprint(web)
 
         return app
